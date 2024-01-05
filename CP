@@ -1,0 +1,394 @@
+#include <iostream>
+#include <vector>
+#include <ctime>
+#include <cstdlib>
+#include <string>
+#include <unistd.h>
+#include <windows.h>
+
+using namespace std;
+
+void enter() {
+    cout << "\n\n\n\t\t\t\t\tPress Any Key To Continue..." << endl;
+    cin.get();
+    system("cls");
+}
+
+void setConsoleColor(int text, int background) {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, text + background * 16);
+}
+
+void displayTitleScreen() {
+    setConsoleColor(6, 0);
+    cout << "                               QUESTS OF ELDORIA                               " << endl
+         << endl;
+    cout << "*******************************************************************************" << endl;
+    cout << "          |                   |                  |                     |        " << endl;
+    cout << " _________|________________.=''_;=.______________|_____________________|_______" << endl;
+    cout << "|                   |  ,-''_,=''    ''=._.   |              |                   " << endl;
+    cout << "|__________________|__'=._o''-.         ''=.______________|__________________" << endl;
+    cout << "          |                ''=.o'=.       -'=.                     |        " << endl;
+    cout << " _________|_____________________:=._o '=._.'_.-='''=.__________________|_______" << endl;
+    cout << "|                   |    _.--' , ; ''=._o.' ,-'''-. '.   |                   " << endl;
+    cout << "|__________________|_._'  ,. .' ' '' ,  ''-._'-.   '. '__|___________________" << endl;
+    cout << "          |           |o''=._' , '' '; .''. ,  '-._'-._; ;              |        " << endl;
+    cout << " ________|___________| |'-.o''=._; .' ' ''.'\\ . '-. /________________|______" << endl;
+    cout << "|                   | |o|    ''-.o''=._''  '' '' ,__.-o;    |                   " << endl;
+    cout << "|___________________|_| |     (#) '-.o ''=.'_.--'_o.-| |____|__________________" << endl;
+    cout << "___/______/______/___|o|.           ''.o|o_.--'    |o|____/______/______/____" << endl;
+    cout << "/_____/______/______/_'=._o--.        | | |        | |/______/______/______/_" << endl;
+    cout << "___/______/______/______/__'=._o--.   |o|o|     _._|o|____/______/______/____" << endl;
+    cout << "/______/______/______/______/____'=._o._| | |_.--'o.--'_/______/______/______/_" << endl;
+    cout << "___/______/______/______/______/_____'=.o|o.--''___/______/______/______/____" << endl;
+    cout << "/_____/______/______/______/______/______/______/______/______/______/____ / " << endl;
+    cout << "*******************************************************************************" << endl;
+}
+
+void displayCharacters() {
+    system("cls");
+    setConsoleColor(5, 0);
+    cout << "                                 SELECT CLASS                                  " << endl;
+    cout << " ------------------------- ------------------------- ------------------------- " << endl;
+    cout << "|                         |                         |                         |" << endl;
+    cout << "|     ---------------     |     ---------------     |     ---------------     |" << endl;
+    cout << "|    |               |    |    |               |    |    |               |    |" << endl;
+    cout << "|    |               |    |    |               |    |    |               |    |" << endl;
+    cout << "|    |               |    |    |               |    |    |               |    |" << endl;
+    cout << "|    |               |    |    |               |    |    |               |    |" << endl;
+    cout << "|    |               |    |    |               |    |    |               |    |" << endl;
+    cout << "|    |    WARRIOR    |    |    |      MAGE     |    |    |     Rogue     |    |" << endl;
+    cout << "|    |               |    |    |               |    |    |               |    |" << endl;
+    cout << "|    |               |    |    |               |    |    |               |    |" << endl;
+    cout << "|    |               |    |    |               |    |    |               |    |" << endl;
+    cout << "|    |               |    |    |               |    |    |               |    |" << endl;
+    cout << "|    |               |    |    |               |    |    |               |    |" << endl;
+    cout << "|     ---------------     |     ---------------     |     ---------------     |" << endl;
+    cout << "|                         |                         |                         |" << endl;
+    cout << "|  Health: |~~~~~~~~~|   |  Health: |~~~~     |   |  Health: |~~~~~~~~  |   |" << endl;
+    cout << "|  Damage: |~~~~~     |   |  Damage: |~~~~~~~~~|   |  Damage: |~~~~~~   |   |" << endl;
+    cout << "|                         |                         |                         |" << endl;
+    cout << "|    Weapons Available    |    Weapons Available    |    Weapons Available    |" << endl;
+    cout << "|   Sword - Spear - Axe   |       Wand - Orb        | Bow - Crossbow - Dagger |" << endl;
+    cout << "|                         |                         |                         |" << endl;
+    cout << "|   Press '1' to select   |   Press '2' to select   |   Press '3' to select   |" << endl;
+    cout << "|                         |                         |                         |" << endl;
+    cout << " ------------------------- ------------------------- ------------------------- " << endl;
+}
+
+void displayQuests() {
+    system("cls");
+    setConsoleColor(4, 0);
+
+    cout << "                               AVAILABLE QUESTS                                " << endl;
+    cout << " ------------------------- ------------------------- ------------------------- " << endl;
+    cout << "|                         |                         |                         |" << endl;
+    cout << "|     ---------------     |     ---------------     |     ---------------     |" << endl;
+    cout << "|    |               |    |    |               |    |    |               |    |" << endl;
+    cout << "|    |               |    |    |               |    |    |               |    |" << endl;
+    cout << "|    |               |    |    |               |    |    |               |    |" << endl;
+    cout << "|    |               |    |    |               |    |    |               |    |" << endl;
+    cout << "|    |    Retrieve   |    |    |     Defeat    |    |    |      Slay     |    |" << endl;
+    cout << "|    |      the      |    |    |       the     |    |    |      the      |    |" << endl;
+    cout << "|    |   Lost Sword  |    |    |  Goblin King  |    |    |     Dragon    |    |" << endl;
+    cout << "|    |               |    |    |               |    |    |               |    |" << endl;
+    cout << "|    |               |    |    |               |    |    |               |    |" << endl;
+    cout << "|    |               |    |    |               |    |    |               |    |" << endl;
+    cout << "|    |               |    |    |               |    |    |               |    |" << endl;
+    cout << "|    |               |    |    |               |    |    |               |    |" << endl;
+    cout << "|     ---------------     |     ---------------     |     ---------------     |" << endl;
+    cout << "|                         |                         |                         |" << endl;
+    cout << "|  Difficulty: |~~~     | |  Difficulty: |~~~~~~  | |  Difficulty: |~~~~~~~~| |" << endl;
+    cout << "|  Reward:     |~~      | |  Reward:     |~~~~    | |  Reward:     |~~~~~~  | |" << endl;
+    cout << "|                         |                         |                         |" << endl;
+    cout << "|   Press '1' to select   |   Press '2' to select   |   Press '3' to select   |" << endl;
+    cout << "|                         |                         |                         |" << endl;
+    cout << " ------------------------- ------------------------- ------------------------- " << endl;
+}
+
+struct Hero {
+    string name;
+    string heroClass;
+    string weapon;
+};
+
+struct Player {
+    string name;
+    string playerClass;
+    string weapon;
+    int health;
+    int experiencePointsWithSubtraction; // Experience points with subtraction during level-up
+    int totalExperiencePoints = 0; // Total accumulated experience points without subtraction
+    int damage;
+    int classChoice;
+    int weaponChoice;
+};
+
+struct Quest {
+    string name;
+    int difficulty;
+    int experienceReward;
+};
+
+void displayCharacterInfo(const Player &player) {
+    cout << "Character Information:- " << endl;
+    cout << "Name:\t\t\t" << player.name << endl;
+    cout << "Class:\t\t\t" << player.playerClass << endl;
+    cout << "Health:\t\t\t" << player.health << endl;
+    cout << "Damage:\t\t\t" << player.damage << endl;
+    cout << "Weapon:\t\t\t" << player.weapon << endl;
+    cout << "Experience Points:\t" << player.experiencePointsWithSubtraction  << endl;
+    cout << "Current Level:\t\t" << (player.totalExperiencePoints / 50) + 1 << endl;
+	enter();
+}
+
+void selectWeapon(Player& player) {
+    cout << "Select a weapon:" << endl;
+    switch (player.classChoice) {
+        case 1: // Warrior
+            cout << "1. Sword" << endl;
+            cout << "2. Spear" << endl;
+            cout << "3. Axe" << endl;
+            break;
+
+        case 2: // Mage
+            cout << "1. Wand" << endl;
+            cout << "2. Orb" << endl;
+            break;
+
+        case 3: // Rogue
+            cout << "1. Bow" << endl;
+            cout << "2. Crossbow" << endl;
+            cout << "3. Dagger" << endl;
+            break;
+
+        default:
+            cout << "Invalid Class! Defaulting to Warrior" << endl;
+            cout << "1. Sword" << endl;
+            cout << "2. Spear" << endl;
+            cout << "3. Axe" << endl;
+            player.classChoice = 1;  // Set class to Warrior
+    }
+
+    cout << "Select Weapon: ";
+    cin >> player.weaponChoice;
+
+    switch (player.classChoice) {
+        case 1: // Warrior
+            switch (player.weaponChoice) {
+                case 1:
+                    player.weapon = "Sword";
+                    player.damage += 30;
+                    break;
+                case 2:
+                    player.weapon = "Spear";
+                    player.damage += 40;
+                    break;
+                case 3:
+                    player.weapon = "Axe";
+                    player.damage += 20;
+                    break;
+                default:
+                    cout << "Invalid Choice! Defaulting to Sword." << endl;
+                    player.weapon = "Sword";
+            }
+            break;
+
+        case 2: // Mage
+            switch (player.weaponChoice) {
+                case 1:
+                    player.weapon = "Wand";
+                    player.damage += 30;
+                    break;
+                case 2:
+                    player.weapon = "Orb";
+                    player.damage += 40;
+                    break;
+                default:
+                    cout << "Invalid Choice! Defaulting to Wand." << endl;
+                    player.weapon = "Wand";
+            }
+            break;
+
+        case 3: // Rogue
+            switch (player.weaponChoice) {
+                case 1:
+                    player.weapon = "Bow";
+                    player.damage += 30;
+                    break;
+                case 2:
+                    player.weapon = "Crossbow";
+                    player.damage += 40;
+                    break;
+                case 3:
+                    player.weapon = "Dagger";
+                    player.damage += 20;
+                    break;
+                default:
+                    cout << "Invalid Choice! Defaulting to Bow." << endl;
+                    player.weapon = "Bow";
+            }
+            break;
+    }
+}
+
+Player createCharacter() {
+    Player player;
+
+    cout << "Enter your character's name: ";
+    cin >> player.name;
+
+    displayCharacters();
+    cout << "Select a class (1 for Warrior, 2 for Mage, 3 for Rogue): ";
+    cin >> player.classChoice;
+
+    // Use a switch statement to select the player class
+    switch (player.classChoice) {
+        case 1:
+            player.playerClass = "Warrior";
+            player.health = 100;
+            player.damage = 50;
+            break;
+
+        case 2:
+            player.playerClass = "Mage";
+            player.health = 50;
+            player.damage = 100;
+            break;
+
+        case 3:
+            player.playerClass = "Rogue";
+            player.health = 80;
+            player.damage = 70;
+            break;
+
+        default:
+            cout << "Invalid Choice! Defaulting to Warrior." << endl;
+            player.playerClass = "Warrior";
+            player.health = 100;
+            player.damage = 50;
+            break;
+    }
+
+    enter();
+    selectWeapon(player);
+    return player;
+}
+
+void embarkOnQuest(Player &player, const Quest &quest) {
+    cout << "Embarking on quest: " << quest.name << " (Difficulty: " << quest.difficulty << ")" << endl << endl;
+	int battleOutcome = rand() % 2;
+	
+	if (battleOutcome == 1) {
+    cout << "Quest completed successfully!" << endl;
+	}
+	else {
+    cout << "Quest failed. Better luck next time!" << endl;
+	}
+}
+
+const int LEVEL_THRESHOLD = 50;
+
+void levelUp(Player& player) {
+    int experienceToNextLevel = (player.experiencePointsWithSubtraction / LEVEL_THRESHOLD) * LEVEL_THRESHOLD;
+
+    if (experienceToNextLevel >= LEVEL_THRESHOLD) {
+        cout << "Congratulations! You've leveled up!" << endl;
+        player.health += 20;
+        player.damage += 10;
+        
+        int levelsGained = experienceToNextLevel / LEVEL_THRESHOLD;
+        player.experiencePointsWithSubtraction -= levelsGained * LEVEL_THRESHOLD;
+
+        cout << "Current Level: " << player.totalExperiencePoints / LEVEL_THRESHOLD + 1 << endl << endl;
+        cout << "Experience Points: " << player.experiencePointsWithSubtraction << endl;
+        cout << "Total Experience Points (without subtraction): " << player.totalExperiencePoints << endl;
+    } else {
+        cout << "You don't have enough experience points to level up yet." << endl;
+    }
+}
+
+void quests(Player& player) {
+    Quest easyQuest{"Retrieve the Lost Sword", 30, 20};
+    Quest mediumQuest{"Defeat the Goblin King", 60, 40};
+    Quest hardQuest{"Slay the Dragon", 80, 60};
+
+    while (true) {
+        displayCharacterInfo(player);
+        enter();
+        displayQuests();
+
+        int questChoice;
+        cout << "Choose a quest (1 for Easy, 2 for Medium, 3 for Hard, 0 to exit): ";
+        cin >> questChoice;
+
+        if (questChoice == 0) {
+            cout << "Exiting game. Goodbye!" << endl;
+            break;
+        }
+
+        Quest selectedQuest;
+        switch (questChoice) {
+		    case 1:
+		        selectedQuest = easyQuest;
+		        break;
+		    case 2:
+		        selectedQuest = mediumQuest;
+		        break;
+		    case 3:
+		        selectedQuest = hardQuest;
+		        break;
+		    default:
+		        cout << "Invalid choice. Please choose a valid quest." << endl;
+		        continue;
+}
+
+        cout << "\nYou have chosen the quest: " << selectedQuest.name << endl;
+        cout << "Difficulty: " << selectedQuest.difficulty << endl;
+        cout << "Experience Reward: " << selectedQuest.experienceReward << endl;
+        enter();
+
+        if (player.health <= 0) {
+            cout << "You don't have enough health to embark on a quest. Heal yourself first!" << endl;
+            continue;
+        }
+
+        system("cls");
+        embarkOnQuest(player, selectedQuest);
+
+		if (player.health > 0) {
+		    cout << "Quest completed! You earned " << selectedQuest.experienceReward << " experience points." << endl << endl;
+		    player.experiencePointsWithSubtraction += selectedQuest.experienceReward;
+		    player.totalExperiencePoints += selectedQuest.experienceReward;
+			levelUp(player);
+				    
+		} else {
+		    cout << "Quest failed. Your health is too low. Better luck next time!" << endl;
+		}
+
+        enter();
+        system("cls");
+    }
+}
+
+int main() {
+    setConsoleColor(6, 0);
+    displayTitleScreen();
+    cout << "\n\n\n\t\t\tPress Enter To Continue..." << endl;
+    cin.ignore();
+    system("cls");
+
+    setConsoleColor(3, 0);
+    cout << "Welcome to the mythical land of Eldoria, where brave adventurers embark on quests to become legendary heroes." << endl;
+    cout << "In this console-based RPG, players create a character, explore the world, engage in battles, and complete quests." << endl;
+    cout << "The game features dynamic storytelling, character progression, and a variety of quests to keep players immersed." << endl;
+    enter();
+
+    cout << "Before we begin our epic journey, let's create your characters." << endl;
+
+    Player player = createCharacter();
+	displayCharacterInfo(player);
+    quests(player);
+
+    return 0;
+}
